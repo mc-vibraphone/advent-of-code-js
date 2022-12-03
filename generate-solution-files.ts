@@ -64,10 +64,13 @@ ${testData
   .map(d => `  '${d}',`)
   .join('\n')}
 ]
+const useTestData = true
 
 export const ${title} = () => {
-  const data = readFileSync(\`\${__dirname}/data.txt\`, 'utf8').split('\\n')
-  console.log(testData)
+  const data = useTestData
+    ? testData
+    : readFileSync(\`\${__dirname}/data.txt\`, 'utf8').split('\\n')
+  console.log(data)
   return 0
 }
 `
