@@ -11,9 +11,12 @@ const testData = [
   'down 8',
   'forward 2',
 ]
+const useTestData = false
 
 export const dive = () => {
-  const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
+  const data = useTestData
+    ? testData
+    : readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
 
   const position1 = data.reduce(
     (position, move) => {

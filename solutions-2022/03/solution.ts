@@ -11,9 +11,12 @@ const testData = [
   'ttgJtRGJQctTZtZT',
   'CrZsJsPPZsGzwwsLwLmpwMDw',
 ]
+const useTestData = false
 
 export const rucksackReorganization = () => {
-  const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
+  const data = useTestData
+    ? testData
+    : readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
 
   const alpha = 'abcdefghijklmnopqrstuvwxyz'
   let score1 = 0

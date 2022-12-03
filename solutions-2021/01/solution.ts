@@ -15,11 +15,14 @@ const testData = [
   '260',
   '263',
 ]
+const useTestData = false
 
 export const sonarSweep = () => {
-  const data = readFileSync(`${__dirname}/data.txt`, 'utf8')
-    .split('\n')
-    .map(i => parseInt(i))
+  const data = (
+    useTestData
+      ? testData
+      : readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
+  ).map(i => parseInt(i))
   let increasedMeasurements1 = 0
   data.forEach((measurement, idx) => {
     if (idx > 0 && measurement > data[idx - 1]) {

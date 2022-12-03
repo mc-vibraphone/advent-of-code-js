@@ -19,9 +19,12 @@ const testData = [
   '',
   '10000',
 ]
+const useTestData = false
 
 export const calorieCounting = () => {
-  const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
+  const data = useTestData
+    ? testData
+    : readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
 
   const results = [0]
   data.forEach(snack => {
