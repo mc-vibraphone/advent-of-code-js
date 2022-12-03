@@ -3,6 +3,7 @@
 // https://adventofcode.com/2022/day/3/input
 
 import * as stream from 'stream';
+<<<<<<< HEAD
 import * as fs from 'fs';
 import * as readline from 'readline';
 
@@ -38,10 +39,39 @@ export const badgeLocators = () => {
 			all_badges.push([...(sets[0])].filter(item => sets[1].has(item)).filter(item => sets[2].has(item)));
 			group_ctr = 0;
 			sets = [];
+=======
+
+const testData = [
+  'vJrwpWtwJgWrhcsFMMfFFhFp',
+  'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+  'PmmdzqPrVvPwwTWBwg',
+  'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+  'ttgJtRGJQctTZtZT',
+  'CrZsJsPPZsGzwwsLwLmpwMDw',
+]
+
+export const rucksackReorganization = () => {
+	//const fs = require('fs');
+
+	const readline = require('node:readline');
+
+	const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
+
+	//const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
+
+	let priority_sum = 0;
+
+	rl.on('line', (line:string) => {
+		console.log(line);
+		if(0 != (line.length % 2)) {
+			console.error(`Line :: ${line} :: is not an even lengthi.`);
+			return false;
+>>>>>>> 375a80e (Initial day 1 2 3 checkin)
 		}
 
 	});
 
+<<<<<<< HEAD
 	// They have annoyingly flipped lower and uppercase values from the axiomatically
 	// correct ASCII values.
 	// This turnes 'a' into 1 then through 'z' to 26
@@ -61,6 +91,11 @@ export const badgeLocators = () => {
 			(total:number, item:string) => total + convert_char_value(item), 0);
 
 		console.log(`Summed priorities is ${this_sum}`);
+=======
+	rl.on('close', () => {
+		console.log(`EOF`);
+		console.log(`Priority sum was ${priority_sum}`);
+>>>>>>> 375a80e (Initial day 1 2 3 checkin)
 	});
 
 	rl.on('error', (error:Error) => {
