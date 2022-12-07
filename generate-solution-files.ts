@@ -41,7 +41,10 @@ const sessionId = process.env.sessionId
   const html = response.data
   const $ = cheerio.load(html)
   const title = camelCase($('h2').text().split(':')[1].replace(' ---', ''))
-  const testData = $($('pre')[0]).text()
+  let testData = $($('pre')[0]).text()
+  if (testData.slice(-1) === '\n') {
+    testData = testData.slice(0, -1)
+  }
 
   console.log(`Year: 20${year} | Day: ${nextDay} | ${title}`)
 
@@ -59,7 +62,6 @@ const sessionId = process.env.sessionId
 
 const testData = [
 ${testData
-  .slice(0, -1)
   .split('\n')
   .map(d => `  '${d}',`)
   .join('\n')}
