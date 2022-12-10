@@ -19,33 +19,67 @@ const testData = [
   'move 1 from 1 to 2',
 ]
 
-	const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
+	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
 
-	//const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
+	const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
 
-export const supplyStacks = () => {
+	export const supplyStacks = () => {
 
-  let stacks:string[] = [];
-  let lines:string[] = [];
+		let stacks = [];
+		let lines:string[] = [];
+		let done_reading = false;
 
-  rl.on('line', (line: string) => {
-    if(!line.includes('1')) {
-      lines.push(line);
-    }
-    else{
-      lines.forEach(line => { console.log(line); });
-      console.log(line);
-    }
-  });
-  
-  rl.on('close', () => {
+		rl.on('line', (line: string) => {
+			console.log(line);
+			if(!line) {
+				return;
+			}
+			if(line.includes('move')) {
+				console.log(`this here is a move thing ${line}`);
+				let _instructions = line.split(' ');
+				let _count = parseInt(_instructions[1]);
+				let _from = parseInt(_instructions[3]) - 1;
+				let _to = parseInt(_instructions[5]) - 1;
+				console.log(` moving ${_count} from ${_from} to ${_to}`);
+				for(let i = 0; i < _count; i++)
+				{
+					stacks[_to].unshift(stacks[_from].shift());
+				}
+				stacks.forEach((stack, idx) => { console.log(`${idx} :: ${stack}`);});
+			}
+			else if(!line.includes('1') && !done_reading) {
+				lines.push(line);
+			}
+			else {
+				done_reading = true;
+				lines.forEach(line => {
+					line.match(/(\s\s\s\s?|\[[A-Z]\])/g).forEach((item, idx) => {
+						if(!stacks[idx]) {
+							stacks[idx] = [];
+						}
+						if(!(item == '    ')) {
+							console.log(`adding ::${item}`);
+							stacks[idx].push(item);
+						}
+						else {
+							console.log(`skpping ${item}`);
+						}
+					});
+				});
+				stacks.forEach((stack, idx) => { console.log(`${idx} :: ${stack}`);});
+			}
 
-    console.log(`EOF`);
-    
-  });
+		});
 
-  rl.on('error', (error: Error) => {
-    console.log(error);
-  });
-  return 0
-}
+		rl.on('close', () => {
+			console.log(`EOF`);
+			console.log(`top level is`);
+			stacks.forEach(stack =>  { console.log(`${stack[0]}`);});
+
+		});
+
+		rl.on('error', (error: Error) => {
+			console.log(error);
+		});
+		return 0
+	}
