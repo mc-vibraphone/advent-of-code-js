@@ -10,11 +10,17 @@ import * as readline from 'readline';
 
 const testData = [
 
-	'mjqjpqmgbljsphdztnvjfqwrcgsml',
+//	'mjqjpqmgbljsphdztnvjfqwrcgsml',
+//	'bvwbjplbgvbhsrlpgdmjqwftvncz',
+//	'nppdvjthqldpwncqszvftbrmjlhg',
+//	'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg',
+//	'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw'
+	//	2 star inputs
+	'mjqjpqmgbljsphdztnvjfqwrcgsmlb',
 	'bvwbjplbgvbhsrlpgdmjqwftvncz',
 	'nppdvjthqldpwncqszvftbrmjlhg',
 	'nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg',
-	'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw'
+	'zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw',
 ]
 
 export const tuningTrouble = () => {
@@ -27,15 +33,15 @@ export const tuningTrouble = () => {
 		console.log(line);
 		let _data = [...line];
 		let _start = 0;
-		let _end = 4;
+		let _end = 14;
 		let buff = new Set();
 		_data.slice(_start, _end).forEach(x => buff.add(x));
-		while(buff.size != 4 && _end < _data.length) {
+		while(buff.size != 14 && _end < _data.length) {
 			buff = new Set();
 			_start++, _end++;
 			_data.slice(_start, _end).forEach(x => buff.add(x));
 		}
-		if(4 == buff.size) {
+		if(14 == buff.size) {
 			console.log(`EOM is at ${_end}`);
 		}
 		else {
