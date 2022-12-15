@@ -2,7 +2,7 @@
 
 
 
-const components: { [key: string]: any } = {
+export const components: { [key: string]: any } = {
 
 }
 

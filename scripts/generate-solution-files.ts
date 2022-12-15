@@ -130,10 +130,9 @@ ${input.data
 
   const componentName = `${startCase(title)}Visualization`.split(' ').join('')
 
-  const visualizationComponentFileContent = `
-import type { FC } from 'react'
+  const visualizationComponentFileContent = `import { useEffect } from 'react'
 import * as solutionExports from './solution'
-
+import type { FC } from 'react'
 import type { VisualizationComponentInfo } from '~/lib/types/VisualizationComponentInfo'
 
 interface ${componentName}Props {
@@ -146,12 +145,13 @@ const ${componentName}: FC<${componentName}Props> = ({
   const { testData, puzzleData } = solutionExports['solutionData']
   const data = testData
 
-  console.log(componentInfo)
-  console.log(Object.keys(solutionExports))
-  console.log(testData, puzzleData)
-
+  useEffect(() => {
+    console.log(componentInfo)
+    console.log(Object.keys(solutionExports))
+    console.log(testData, puzzleData)
+  }, [])
   return (
-    <div>
+    <div className="h-full">
       <div>${displayName} Visualization</div>
     </div>
   )

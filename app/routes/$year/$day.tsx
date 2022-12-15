@@ -42,9 +42,5 @@ export default function SeedRoute() {
     },
   }
 
-  return (
-    <div>
-      <Component componentInfo={info} />
-    </div>
-  )
+  return <Component componentInfo={info} />
 }

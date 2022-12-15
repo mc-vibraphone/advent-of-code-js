@@ -44,7 +44,7 @@ ${solutionDays
   })
   .join('\n')}
 
-const components: { [key: string]: any } = {
+export const components: { [key: string]: any } = {
 ${solutionDays
   .map(sol => {
     const solutionDay = sol.day.toString().padStart(2, '0')
