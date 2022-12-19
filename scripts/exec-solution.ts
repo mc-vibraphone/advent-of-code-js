@@ -17,9 +17,10 @@ const year = args[2].length === 2 ? `20${args[2]}` : args[2]
 
 const day = `${args[3]}`.padStart(2, '0')
 
-const modulePath = `../app/${solutionsDir}/${year}/${day}/solution.ts`
+const modulePath = `${__dirname}/../app/${solutionsDir}/${year}/${day}/solution.ts`
+console.log(modulePath)
 if (existsSync(modulePath)) {
-  const dynamicModule = require(`../app/${solutionsDir}/${year}/${day}/solution.ts`)
+  const dynamicModule = require(modulePath)
   const func = dynamicModule[Object.keys(dynamicModule)[1]]
 
   console.time(day)

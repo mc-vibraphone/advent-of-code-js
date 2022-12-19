@@ -13,9 +13,10 @@ cp .env.example .env
 
 ## TODO
 
-- [ ] Create index page dynamically showing links for all existing solutions
-- [ ] Establish CSS patterns and add some fonts (Probably tailwind)
+- [ ] Incorporate Jest testing and have a test file with a stubbed test populate for each day
+- [ ] Handle error page when you go to a visualization that doesn't exist - route back to index
 - [ ] Update readme file with all relevant info
+- [ ] Integrate previous solutions from alternate project
 
 In the resulting .env file, you need to replace the value for `sessionId` with your actual advent-of-code session cookie value
 

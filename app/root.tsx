@@ -7,7 +7,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-
+import { ClientOnly } from 'remix-utils'
 import tailwind from '~/styles/tailwind.css'
 
 export const meta: MetaFunction = () => ({
@@ -36,7 +36,7 @@ export default function App() {
         <Links />
       </head>
       <body className="font-aoc">
-        <Outlet />
+        <ClientOnly>{() => <Outlet />}</ClientOnly>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
