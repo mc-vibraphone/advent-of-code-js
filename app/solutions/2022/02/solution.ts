@@ -3,6 +3,13 @@
 
 import { puzzleData, testData } from './data'
 
+const rockPaperScissors = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   return data.reduce((points, game) => {
     const [opponent, you] = game.split(' ')
@@ -91,16 +98,9 @@ const part2 = (data: string[]) => {
   }, 0)
 }
 
+export default rockPaperScissors
+
 export const solutionData = {
   puzzleData,
   testData,
 }
-
-export const rockPaperScissors = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below

@@ -3,6 +3,13 @@
 
 import { puzzleData, testData } from './data'
 
+const rucksackReorganization = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   let score = 0
 
@@ -49,18 +56,11 @@ const part2 = (data: string[]) => {
   return score
 }
 
+export default rucksackReorganization
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-const alpha = 'abcdefghijklmnopqrstuvwxyz'
-
-export const rucksackReorganization = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below
+export const alpha = 'abcdefghijklmnopqrstuvwxyz'

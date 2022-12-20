@@ -3,6 +3,13 @@
 
 import { puzzleData, testData } from './data'
 
+const noSpaceLeftOnDevice = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   const { flatDirs } = generateFileSystem(data)
   return flatDirs
@@ -19,32 +26,25 @@ const part2 = (data: string[]) => {
   )
 }
 
+export default noSpaceLeftOnDevice
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-export const noSpaceLeftOnDevice = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below
-
-interface File {
+export interface File {
   name: string
   type: 'file'
   size: number
 }
-interface Dir {
+export interface Dir {
   name: string
   type: 'dir'
   contents: (File | Dir)[]
 }
 
-const createDir = (name: string) => {
+export const createDir = (name: string) => {
   return {
     name,
     type: 'dir',
@@ -52,7 +52,7 @@ const createDir = (name: string) => {
   } as Dir
 }
 
-const createFile = (name: string, size: number) => {
+export const createFile = (name: string, size: number) => {
   return {
     name,
     type: 'file',
@@ -60,7 +60,7 @@ const createFile = (name: string, size: number) => {
   } as File
 }
 
-const getDirSize = (dir: Dir) => {
+export const getDirSize = (dir: Dir) => {
   return dir.contents.reduce((size, i): number => {
     if (i.type === 'file') {
       return size + i.size
@@ -70,7 +70,7 @@ const getDirSize = (dir: Dir) => {
   }, 0)
 }
 
-const generateFileSystem = (data: string[]) => {
+export const generateFileSystem = (data: string[]) => {
   const fileSystem = createDir('/')
   let workingDir: Dir[] = []
   let flatDirs: Dir[] = []

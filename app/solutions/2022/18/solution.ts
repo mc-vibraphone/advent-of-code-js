@@ -4,6 +4,13 @@
 import { compact } from 'lodash'
 import { puzzleData, testData } from './data'
 
+const boilingBoulders = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   interface Cube {
     coordinate: number[]
@@ -57,19 +64,12 @@ const part2 = (data: string[]) => {
   )
 }
 
+export default boilingBoulders
+
 export const solutionData = {
   puzzleData,
   testData,
 }
-
-export const boilingBoulders = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below
 
 export class Cube {
   x: number

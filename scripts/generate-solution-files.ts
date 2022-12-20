@@ -73,20 +73,7 @@ const generateSolutionFiles = async () => {
 
 import { puzzleData, testData } from './data'
 
-const part1 = (data: string[]) => {
-  return null
-}
-
-const part2 = (data: string[]) => {
-  return null
-}
-
-export const solutionData = {
-  puzzleData,
-  testData,
-}
-
-export const ${title} = () => {
+const ${title} = () => {
   const useTestData = true
   const data = useTestData ? testData : puzzleData
 
@@ -95,7 +82,20 @@ export const ${title} = () => {
   return [part1(data), part2(data)]
 }
 
-// Other exports should go below
+const part1 = (data: string[]) => {
+  return null
+}
+
+const part2 = (data: string[]) => {
+  return null
+}
+
+export default ${title}
+
+export const solutionData = {
+  puzzleData,
+  testData,
+}
 `
   writeFileSync(`${solutionDayPath}solution.ts`, solutionFileContent)
 

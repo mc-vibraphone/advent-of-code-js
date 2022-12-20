@@ -3,6 +3,13 @@
 
 import { puzzleData, testData } from './data'
 
+const treetopTreeHouse = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   const trees = constructTreeData(data)
 
@@ -114,21 +121,14 @@ const part2 = (data: string[]) => {
   return highestScenicScore
 }
 
+export default treetopTreeHouse
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-export const treetopTreeHouse = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-const constructTreeData = (data: string[]) =>
+export const constructTreeData = (data: string[]) =>
   data.map(row =>
     row.split('').map(tree => ({ height: parseInt(tree), visible: false })),
   )
-
-// Other exports should go below

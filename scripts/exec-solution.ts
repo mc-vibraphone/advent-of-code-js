@@ -21,7 +21,7 @@ const modulePath = `${__dirname}/../app/${solutionsDir}/${year}/${day}/solution.
 console.log(modulePath)
 if (existsSync(modulePath)) {
   const dynamicModule = require(modulePath)
-  const func = dynamicModule[Object.keys(dynamicModule)[1]]
+  const func = dynamicModule['default']
 
   console.time(day)
   const result = func()

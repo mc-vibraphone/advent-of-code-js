@@ -2,7 +2,13 @@
 // https://adventofcode.com/2022/day/20/input
 
 import { puzzleData, testData } from './data'
-import { uniq } from 'lodash'
+
+const grovePositioningSystem = () => {
+  const useTestData = false
+  const data = (useTestData ? testData : puzzleData).map(n => parseInt(n))
+
+  return [part1(data), part2(data)]
+}
 
 const part1 = (data: number[]) => {
   let { actions, orderedList } = constructLists(data)
@@ -31,31 +37,26 @@ const part2 = (data: number[]) => {
   return a + b + c
 }
 
+export default grovePositioningSystem
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-interface ActionListItem {
+export interface ActionListItem {
   num: number
   id: number
 }
 
-interface OrderedListItem {
+export interface OrderedListItem {
   num: number
   id: number
   prevRef: OrderedListItem
   nextRef: OrderedListItem
 }
 
-export const grovePositioningSystem = () => {
-  const useTestData = false
-  const data = (useTestData ? testData : puzzleData).map(n => parseInt(n))
-
-  return [part1(data), part2(data)]
-}
-
-const constructLists = (data: number[]) => {
+export const constructLists = (data: number[]) => {
   const actions: ActionListItem[] = [...data].map((n, i) => ({ num: n, id: i }))
   const orderedListConstruct: any = [...data].map((n, i) => ({
     num: n,
@@ -82,7 +83,7 @@ const constructLists = (data: number[]) => {
   }
 }
 
-const performEncryptionMix = (
+export const performEncryptionMix = (
   orderedList: OrderedListItem[],
   actions: ActionListItem[],
 ) => {
@@ -121,7 +122,7 @@ const performEncryptionMix = (
   return orderedList
 }
 
-const getNthNumber = (list: OrderedListItem[], n: number) => {
+export const getNthNumber = (list: OrderedListItem[], n: number) => {
   let root = list.find(i => i.num === 0) as OrderedListItem
   for (let x = 0; x < n; x++) {
     root = root.nextRef
@@ -129,7 +130,7 @@ const getNthNumber = (list: OrderedListItem[], n: number) => {
   return root
 }
 
-const printList = (list: OrderedListItem[]) => {
+export const printList = (list: OrderedListItem[]) => {
   let root = list.find(n => n.num === 0) as OrderedListItem
   const results: number[] = [root.num]
   root = root.nextRef
@@ -139,5 +140,3 @@ const printList = (list: OrderedListItem[]) => {
   }
   console.log(JSON.stringify(results))
 }
-
-// Other exports should go below

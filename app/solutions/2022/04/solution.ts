@@ -1,7 +1,15 @@
 // https://adventofcode.com/2022/day/4
 // https://adventofcode.com/2022/day/4/input
+
 import { range, intersection } from 'lodash'
 import { puzzleData, testData } from './data'
+
+const campCleanup = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
 
 const part1 = (data: string[]) => {
   let target = 0
@@ -33,12 +41,14 @@ const part2 = (data: string[]) => {
   return target
 }
 
+export default campCleanup
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-const prepareData = (data: string[]) => {
+export const prepareData = (data: string[]) => {
   return data.map(pair =>
     pair
       .split(',')
@@ -47,12 +57,3 @@ const prepareData = (data: string[]) => {
       ),
   )
 }
-
-export const campCleanup = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below

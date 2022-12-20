@@ -4,6 +4,13 @@
 import { compact } from 'lodash'
 import { puzzleData, testData } from './data'
 
+const hillClimbingAlgorithm = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   const grid = new Grid(data)
   const goalSpace = grid.cells.find(c => c.isGoal) as GridCell
@@ -32,19 +39,12 @@ const part2 = (data: string[]) => {
   return shortestPath
 }
 
+export default hillClimbingAlgorithm
+
 export const solutionData = {
   puzzleData,
   testData,
 }
-
-export const hillClimbingAlgorithm = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below
 
 export class GridCell {
   id: number

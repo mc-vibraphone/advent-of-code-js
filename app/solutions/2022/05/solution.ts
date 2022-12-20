@@ -3,6 +3,13 @@
 
 import { puzzleData, testData } from './data'
 
+const supplyStacks = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   const dataSeparator = data.indexOf('')
   const stacks = composeStacks(data)
@@ -41,12 +48,14 @@ const part2 = (data: string[]) => {
   return stacks.map(s => s[s.length - 1]).join('')
 }
 
+export default supplyStacks
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-const composeStacks = (data: string[]) => {
+export const composeStacks = (data: string[]) => {
   const dataSeparator = data.indexOf('')
   const stacks: string[][] = data[dataSeparator - 2].split(' ').map(_ => [])
 
@@ -59,12 +68,3 @@ const composeStacks = (data: string[]) => {
   }
   return stacks
 }
-
-export const supplyStacks = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below

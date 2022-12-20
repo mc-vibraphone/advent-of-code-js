@@ -3,6 +3,13 @@
 
 import { puzzleData, testData } from './data'
 
+const calorieCounting = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data), part2(data)]
+}
+
 const part1 = (data: string[]) => {
   return calculateTotals(data)[0]
 }
@@ -13,12 +20,14 @@ const part2 = (data: string[]) => {
     .reduce((sum, val) => sum + val, 0)
 }
 
+export default calorieCounting
+
 export const solutionData = {
   puzzleData,
   testData,
 }
 
-const calculateTotals = (data: string[]) => {
+export const calculateTotals = (data: string[]) => {
   const results = [0]
   data.forEach(snack => {
     const calories = parseInt(snack)
@@ -31,12 +40,3 @@ const calculateTotals = (data: string[]) => {
 
   return results.sort((a, b) => b - a)
 }
-
-export const calorieCounting = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data), part2(data)]
-}
-
-// Other exports should go below
