@@ -60,15 +60,16 @@ const generateSolutionFiles = async () => {
   const displayName = $('h2').text().split(':')[1].replace(' ---', '')
   const title = camelCase(displayName)
 
-  console.log(
-    `Generating Solutions Files for: (Year: ${year} | Day: ${day} | ${title})`,
-  )
-
   const solutionDayPath = `${solutionYearPath}${String(day).padStart(2, '0')}/`
 
-  mkdirSync(solutionDayPath)
+  if (!existsSync(solutionDayPath)) {
+    mkdirSync(solutionDayPath)
 
-  const solutionFileContent = `// ${adventofcodeUrl}
+    console.log(
+      `Generating Solutions Files for: (Year: ${year} | Day: ${day} | ${title})`,
+    )
+
+    const solutionFileContent = `// ${adventofcodeUrl}
 // ${adventofcodeUrl}/input
 
 import { puzzleData, testData } from './data'
@@ -97,21 +98,21 @@ export const solutionData = {
   testData,
 }
 `
-  writeFileSync(`${solutionDayPath}solution.ts`, solutionFileContent)
+    writeFileSync(`${solutionDayPath}solution.ts`, solutionFileContent)
 
-  // TODO: This test data is often not the correct part of the page being pulled
-  let testData = $($('pre')[0]).text()
-  if (testData.slice(-1) === '\n') {
-    testData = testData.slice(0, -1)
-  }
+    // TODO: This test data is often not the correct part of the page being pulled
+    let testData = $($('pre')[0]).text()
+    if (testData.slice(-1) === '\n') {
+      testData = testData.slice(0, -1)
+    }
 
-  const input = await axios(`${adventofcodeUrl}/input`, {
-    headers: {
-      Cookie: `session=${sessionId}`,
-    },
-  })
+    const input = await axios(`${adventofcodeUrl}/input`, {
+      headers: {
+        Cookie: `session=${sessionId}`,
+      },
+    })
 
-  const dataFileContent = `export const testData = [
+    const dataFileContent = `export const testData = [
 ${testData
   .split('\n')
   .map((l: string) => `  '${l}',`)
@@ -126,11 +127,11 @@ ${input.data
   .join('\n')}
 ]
   `
-  writeFileSync(`${solutionDayPath}data.ts`, dataFileContent)
+    writeFileSync(`${solutionDayPath}data.ts`, dataFileContent)
 
-  const componentName = `${startCase(title)}Visualization`.split(' ').join('')
+    const componentName = `${startCase(title)}Visualization`.split(' ').join('')
 
-  const visualizationComponentFileContent = `import { useEffect } from 'react'
+    const visualizationComponentFileContent = `import { useEffect } from 'react'
 import * as solutionExports from './solution'
 import type { FC } from 'react'
 import type { VisualizationComponentInfo } from '~/lib/types/VisualizationComponentInfo'
@@ -162,12 +163,17 @@ const ${componentName}: FC<${componentName}Props> = ({
 
 export default ${componentName}
 `
-  writeFileSync(
-    `${solutionDayPath}Visualization.tsx`,
-    visualizationComponentFileContent,
-  )
+    writeFileSync(
+      `${solutionDayPath}Visualization.tsx`,
+      visualizationComponentFileContent,
+    )
 
-  generateDynamicImportFile()
+    generateDynamicImportFile()
+  } else {
+    console.log(
+      `Solutions Files for: (Year: ${year} | Day: ${day}) have already been generated.`,
+    )
+  }
 }
 
 generateSolutionFiles().catch(e => {

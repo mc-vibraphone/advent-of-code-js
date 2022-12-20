@@ -2,6 +2,8 @@
 
 import vis2022_20 from '~/solutions/2022/20/Visualization'
 import vis2022_18 from '~/solutions/2022/18/Visualization'
+import vis2022_14 from '~/solutions/2022/14/Visualization'
+import vis2022_13 from '~/solutions/2022/13/Visualization'
 import vis2022_12 from '~/solutions/2022/12/Visualization'
 import vis2022_10 from '~/solutions/2022/10/Visualization'
 import vis2022_09 from '~/solutions/2022/09/Visualization'
@@ -17,6 +19,8 @@ import vis2022_01 from '~/solutions/2022/01/Visualization'
 export const components: { [key: string]: any } = {
   vis2022_20,
   vis2022_18,
+  vis2022_14,
+  vis2022_13,
   vis2022_12,
   vis2022_10,
   vis2022_09,
