@@ -21,6 +21,9 @@ const CampCleanupVisualization: FC<CampCleanupVisualizationProps> = ({
   return (
     <div className="h-full">
       <div> Camp Cleanup Visualization</div>
+      <div className="w-full h-full flex items-center justify-center">
+        Not Implemented
+      </div>
     </div>
   )
 }

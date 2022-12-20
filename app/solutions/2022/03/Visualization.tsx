@@ -7,9 +7,9 @@ interface RucksackReorganizationVisualizationProps {
   componentInfo: VisualizationComponentInfo
 }
 
-const RucksackReorganizationVisualization: FC<RucksackReorganizationVisualizationProps> = ({
-  componentInfo,
-}) => {
+const RucksackReorganizationVisualization: FC<
+  RucksackReorganizationVisualizationProps
+> = ({ componentInfo }) => {
   const { testData, puzzleData } = solutionExports['solutionData']
   const data = testData
 
@@ -21,6 +21,9 @@ const RucksackReorganizationVisualization: FC<RucksackReorganizationVisualizatio
   return (
     <div className="h-full">
       <div> Rucksack Reorganization Visualization</div>
+      <div className="w-full h-full flex items-center justify-center">
+        Not Implemented
+      </div>
     </div>
   )
 }

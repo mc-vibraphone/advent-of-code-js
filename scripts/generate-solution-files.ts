@@ -153,6 +153,9 @@ const ${componentName}: FC<${componentName}Props> = ({
   return (
     <div className="h-full">
       <div>${displayName} Visualization</div>
+      <div className="w-full h-full flex items-center justify-center">
+        Not Implemented
+      </div>
     </div>
   )
 }

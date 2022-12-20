@@ -21,6 +21,9 @@ const CalorieCountingVisualization: FC<CalorieCountingVisualizationProps> = ({
   return (
     <div className="h-full">
       <div> Calorie Counting Visualization</div>
+      <div className="w-full h-full flex items-center justify-center">
+        Not Implemented
+      </div>
     </div>
   )
 }

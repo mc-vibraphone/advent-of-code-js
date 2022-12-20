@@ -21,6 +21,9 @@ const TuningTroubleVisualization: FC<TuningTroubleVisualizationProps> = ({
   return (
     <div className="h-full">
       <div> Tuning Trouble Visualization</div>
+      <div className="w-full h-full flex items-center justify-center">
+        Not Implemented
+      </div>
     </div>
   )
 }

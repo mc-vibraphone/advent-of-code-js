@@ -7,9 +7,9 @@ interface RockPaperScissorsVisualizationProps {
   componentInfo: VisualizationComponentInfo
 }
 
-const RockPaperScissorsVisualization: FC<RockPaperScissorsVisualizationProps> = ({
-  componentInfo,
-}) => {
+const RockPaperScissorsVisualization: FC<
+  RockPaperScissorsVisualizationProps
+> = ({ componentInfo }) => {
   const { testData, puzzleData } = solutionExports['solutionData']
   const data = testData
 
@@ -21,6 +21,9 @@ const RockPaperScissorsVisualization: FC<RockPaperScissorsVisualizationProps> = 
   return (
     <div className="h-full">
       <div> Rock Paper Scissors Visualization</div>
+      <div className="w-full h-full flex items-center justify-center">
+        Not Implemented
+      </div>
     </div>
   )
 }
