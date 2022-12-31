@@ -50,7 +50,6 @@ const part2 = (data: string[]) => {
     }
   }
   const screen = []
-  console.log(cycleValues.length)
   for (let i = 0; i < 240 / 40; i++) {
     screen.push(output.slice(i * 40, i * 40 + 40).join(''))
   }

@@ -168,6 +168,21 @@ export default ${componentName}
       visualizationComponentFileContent,
     )
 
+    const testFileContent = `import ${title} from './solution'
+
+describe('Solution for ${displayName.trim()}', () => {
+  const answer = ${title}()
+  it('Part 1 should have the correct result', () => {
+    expect(answer[0]).toBe(0)
+  })
+  it('Part 2 should have the correct result', () => {
+    expect(answer[1]).toBe(0)
+  })
+})
+`
+
+    writeFileSync(`${solutionDayPath}solution.test.ts`, testFileContent)
+
     generateDynamicImportFile()
   } else {
     console.log(

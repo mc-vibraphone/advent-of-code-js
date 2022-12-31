@@ -4,6 +4,13 @@
 import { uniq } from 'lodash'
 import { puzzleData, testData } from './data'
 
+const tuningTrouble = () => {
+  const useTestData = false
+  const data = useTestData ? testData : puzzleData
+
+  return [part1(data[0]), part2(data[0])]
+}
+
 const part1 = (data: string) => {
   let result = 0
   for (let i = 4; i <= data.length; i++) {
@@ -26,14 +33,9 @@ const part2 = (data: string) => {
   return result
 }
 
+export default tuningTrouble
+
 export const solutionData = {
   puzzleData,
   testData,
-}
-
-export const tuningTrouble = () => {
-  const useTestData = false
-  const data = useTestData ? testData : puzzleData
-
-  return [part1(data[0]), part2(data[0])]
 }
