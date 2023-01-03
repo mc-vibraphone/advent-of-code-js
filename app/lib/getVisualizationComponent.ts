@@ -6,6 +6,7 @@ import vis2022_21 from '~/solutions/2022/21/Visualization'
 import vis2022_20 from '~/solutions/2022/20/Visualization'
 import vis2022_19 from '~/solutions/2022/19/Visualization'
 import vis2022_18 from '~/solutions/2022/18/Visualization'
+import vis2022_16 from '~/solutions/2022/16/Visualization'
 import vis2022_14 from '~/solutions/2022/14/Visualization'
 import vis2022_13 from '~/solutions/2022/13/Visualization'
 import vis2022_12 from '~/solutions/2022/12/Visualization'
@@ -20,6 +21,9 @@ import vis2022_04 from '~/solutions/2022/04/Visualization'
 import vis2022_03 from '~/solutions/2022/03/Visualization'
 import vis2022_02 from '~/solutions/2022/02/Visualization'
 import vis2022_01 from '~/solutions/2022/01/Visualization'
+import vis2021_10 from '~/solutions/2021/10/Visualization'
+import vis2021_09 from '~/solutions/2021/09/Visualization'
+import vis2021_08 from '~/solutions/2021/08/Visualization'
 import vis2021_07 from '~/solutions/2021/07/Visualization'
 import vis2021_06 from '~/solutions/2021/06/Visualization'
 import vis2021_05 from '~/solutions/2021/05/Visualization'
@@ -35,6 +39,7 @@ export const components: { [key: string]: any } = {
   vis2022_20,
   vis2022_19,
   vis2022_18,
+  vis2022_16,
   vis2022_14,
   vis2022_13,
   vis2022_12,
@@ -49,6 +54,9 @@ export const components: { [key: string]: any } = {
   vis2022_03,
   vis2022_02,
   vis2022_01,
+  vis2021_10,
+  vis2021_09,
+  vis2021_08,
   vis2021_07,
   vis2021_06,
   vis2021_05,
