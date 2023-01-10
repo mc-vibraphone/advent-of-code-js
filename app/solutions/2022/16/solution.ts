@@ -1,10 +1,11 @@
 // https://adventofcode.com/2022/day/16
 // https://adventofcode.com/2022/day/16/input
 
+import { flatten } from 'lodash'
 import { puzzleData, testData } from './data'
 
 const proboscideaVolcanium = () => {
-  const useTestData = true
+  const useTestData = false
   const data = useTestData ? testData : puzzleData
 
   return [part1(data), part2(data)]
@@ -12,16 +13,21 @@ const proboscideaVolcanium = () => {
 
 const part1 = (data: string[]) => {
   const network = generateValveNetwork(data)
-  return traverseNetwork({
+  const protocols = generateValveActivationProtocols({
     network,
-    path: [network[0].id],
-    time: 0,
-    pressure: 0,
+    path: [{ valveId: 'AA', activationTime: 30, flowRate: 0 }],
   })
+  return determineOptimalProtocal(protocols)
 }
 
 const part2 = (data: string[]) => {
-  return null
+  const network = generateValveNetwork(data)
+  const protocols = generateValveActivationProtocols({
+    network,
+    path: [{ valveId: 'AA', activationTime: 26, flowRate: 0 }],
+  })
+
+  return determineOptimalDualPathProtocal(protocols)
 }
 
 export default proboscideaVolcanium
@@ -86,63 +92,11 @@ export const generateValveNetwork = (data: string[]) => {
   return valveNetork
 }
 
-export interface NetworkTraversal {
-  network: Valve[]
-  path: string[]
-  time: number
-  pressure: number
-}
-
-export const traverseNetwork = ({
-  network,
-  path,
-  time,
-  pressure,
-}: NetworkTraversal) => {
-  const relevantValves = network.filter(
-    valve => valve.flow > 0 && !path.includes(valve.id),
-  )
-  const currentValve = network.find(v => v.id === path.slice(-1)[0]) as Valve
-
-  const pressureThroughput = path
-    .map(vid => network.find(v => v.id === vid)?.flow || 0)
-    .reduce((sum, num) => sum + num, 0)
-
-  if (relevantValves.length === 0) {
-    return pressure + (30 - time) * pressureThroughput
-  }
-
-  const maxPressureValue: number = relevantValves.reduce(
-    (maxPressure, valve) => {
-      // Time needed to travel to the valve and open it
-      const distance = currentValve.paths[valve.id].length + 1
-
-      // If time + distance = 30 then there will be no time to capitalize on the pressure release
-      if (time + distance < 30) {
-        const pathTraversal = traverseNetwork({
-          network,
-          path: [...path, valve.id],
-          pressure: pressure + distance * pressureThroughput,
-          time: time + distance,
-        })
-        return Math.max(maxPressure, pathTraversal)
-      } else {
-        const pathFinalPressure = pressure + (30 - time) * pressureThroughput
-        return Math.max(maxPressure, pathFinalPressure)
-      }
-    },
-    0,
-  )
-
-  return maxPressureValue
-}
-
 export class Valve {
   id: string
   flow: number
   connectsTo: string[]
   connections: Valve[]
-  on: boolean
   paths: { [key: string]: string[] }
 
   constructor({
@@ -158,7 +112,108 @@ export class Valve {
     this.flow = flow
     this.connectsTo = connectsTo
     this.connections = []
-    this.on = false
     this.paths = {}
   }
+}
+
+interface PathNode {
+  valveId: string
+  activationTime: number
+  flowRate: number
+}
+
+export const generateValveActivationProtocols = ({
+  network,
+  path,
+}: {
+  network: Valve[]
+  path: PathNode[]
+}) => {
+  const { valveId, activationTime: timeRemaining } = path.slice(-1)[0]
+  const currentValve = network.find(v => v.id === valveId) as Valve
+  const relevantValves = network.filter(
+    valve =>
+      valve.flow > 0 &&
+      (currentValve.paths[valve.id] || []).length + 1 <= timeRemaining &&
+      path.every(pathValve => pathValve.valveId !== valve.id),
+  )
+  let protocolPaths: PathNode[][] = []
+  if (!relevantValves.length) {
+    protocolPaths = [path]
+  } else {
+    protocolPaths = flatten(
+      relevantValves.map(relevantValve => {
+        return generateValveActivationProtocols({
+          network,
+          path: [
+            ...path,
+            {
+              valveId: relevantValve.id,
+              flowRate: relevantValve.flow,
+              activationTime:
+                timeRemaining -
+                (currentValve.paths[relevantValve.id].length + 1),
+            },
+          ],
+        })
+      }),
+    )
+  }
+  return protocolPaths
+}
+
+export const determineOptimalProtocal = (protocols: PathNode[][]) => {
+  let bestOutcome = 0
+  protocols.forEach(protocol => {
+    bestOutcome = Math.max(
+      bestOutcome,
+      protocol
+        .map(pathNode => pathNode.activationTime * pathNode.flowRate)
+        .reduce((sum, num) => sum + num, 0),
+    )
+  })
+
+  return bestOutcome
+}
+
+export const determineOptimalDualPathProtocal = (protocols: PathNode[][]) => {
+  let bestOutcome = 0
+
+  protocols.forEach(protocol1 => {
+    const asdf = protocols.filter(protocol => {
+      return !protocol.some(pathNode => {
+        return (
+          (protocol1[1] && pathNode.valveId === protocol1[1].valveId) ||
+          (protocol1[2] && pathNode.valveId === protocol1[2].valveId) ||
+          (protocol1[3] && pathNode.valveId === protocol1[3].valveId) ||
+          (protocol1[4] && pathNode.valveId === protocol1[4].valveId)
+        )
+      })
+    })
+
+    asdf.forEach(protocol2 => {
+      const combinedProtocol: { [key: string]: PathNode } = {}
+      const protocolOptions: PathNode[] = [...protocol1, ...protocol2]
+      protocolOptions.forEach(node => {
+        combinedProtocol[node.valveId] = {
+          activationTime: Math.max(
+            combinedProtocol[node.valveId]
+              ? combinedProtocol[node.valveId].activationTime
+              : 0,
+            node.activationTime,
+          ),
+          flowRate: node.flowRate,
+          valveId: node.valveId,
+        }
+      })
+
+      bestOutcome = Math.max(
+        bestOutcome,
+        Object.values(combinedProtocol)
+          .map(pathNode => pathNode.activationTime * pathNode.flowRate)
+          .reduce((sum, num) => sum + num, 0),
+      )
+    })
+  })
+  return bestOutcome
 }
