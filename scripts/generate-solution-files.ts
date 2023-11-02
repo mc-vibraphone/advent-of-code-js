@@ -110,7 +110,7 @@ export const solutionData = {
       headers: {
         Cookie: `session=${sessionId}`,
       },
-    })
+    }).catch(() => {})
 
     const dataFileContent = `export const testData = [
 ${testData
@@ -120,11 +120,14 @@ ${testData
 ]
   
 export const puzzleData = [
-${input.data
-  .slice(0, -1)
-  .split('\n')
-  .map((l: string) => `  '${l}',`)
-  .join('\n')}
+${
+  input?.data ||
+  ''
+    .slice(0, -1)
+    .split('\n')
+    .map((l: string) => `  '${l}',`)
+    .join('\n')
+}
 ]
   `
     writeFileSync(`${solutionDayPath}data.ts`, dataFileContent)
