@@ -105,5 +105,3 @@ const getVisualizationComponent = (year: number, day: number) => {
 }
 
 export default getVisualizationComponent
-  
-  
