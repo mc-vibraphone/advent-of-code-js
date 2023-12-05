@@ -45,6 +45,7 @@ const testData = [
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
 
 	const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
@@ -112,31 +113,66 @@ const testData = [
 >>>>>>> f08969e (day 5 stuff)
 =======
 	const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
+=======
+	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
+>>>>>>> 57487ef (day 1 complete)
 
-	//const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
+	const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
 
+<<<<<<< HEAD
 >>>>>>> 097fe03 (wip)
 export const supplyStacks = () => {
+=======
+	export const supplyStacks = () => {
+>>>>>>> 57487ef (day 1 complete)
 
-  let stacks:string[] = [];
-  let lines:string[] = [];
+		let stacks = [];
+		let lines:string[] = [];
+		let done_reading = false;
 
-  rl.on('line', (line: string) => {
-    if(!line.includes('1')) {
-      lines.push(line);
-    }
-    else{
-      lines.forEach(line => { console.log(line); });
-      console.log(line);
-    }
-  });
-  
-  rl.on('close', () => {
+		rl.on('line', (line: string) => {
+			console.log(line);
+			if(!line) {
+				return;
+			}
+			if(line.includes('move')) {
+				console.log(`this here is a move thing ${line}`);
+				let _instructions = line.split(' ');
+				let _count = parseInt(_instructions[1]);
+				let _from = parseInt(_instructions[3]) - 1;
+				let _to = parseInt(_instructions[5]) - 1;
+				console.log(` moving ${_count} from ${_from} to ${_to}`);
+				for(let i = 0; i < _count; i++)
+				{
+					stacks[_to].unshift(stacks[_from].shift());
+				}
+				stacks.forEach((stack, idx) => { console.log(`${idx} :: ${stack}`);});
+			}
+			else if(!line.includes('1') && !done_reading) {
+				lines.push(line);
+			}
+			else {
+				done_reading = true;
+				lines.forEach(line => {
+					line.match(/(\s\s\s\s?|\[[A-Z]\])/g).forEach((item, idx) => {
+						if(!stacks[idx]) {
+							stacks[idx] = [];
+						}
+						if(!(item == '    ')) {
+							console.log(`adding ::${item}`);
+							stacks[idx].push(item);
+						}
+						else {
+							console.log(`skpping ${item}`);
+						}
+					});
+				});
+				stacks.forEach((stack, idx) => { console.log(`${idx} :: ${stack}`);});
+			}
 
-    console.log(`EOF`);
-    
-  });
+		});
 
+<<<<<<< HEAD
   rl.on('error', (error: Error) => {
     console.log(error);
   });
@@ -146,3 +182,17 @@ export const supplyStacks = () => {
 >>>>>>> 7f5443e (day 5 initial)
 =======
 >>>>>>> f08969e (day 5 stuff)
+=======
+		rl.on('close', () => {
+			console.log(`EOF`);
+			console.log(`top level is`);
+			stacks.forEach(stack =>  { console.log(`${stack[0]}`);});
+
+		});
+
+		rl.on('error', (error: Error) => {
+			console.log(error);
+		});
+		return 0
+	}
+>>>>>>> 57487ef (day 1 complete)
