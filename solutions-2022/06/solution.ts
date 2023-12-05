@@ -2,6 +2,7 @@ import { readFileSync } from 'fs'
 
 // https://adventofcode.com/2022/day/6
 // https://adventofcode.com/2022/day/6/input
+<<<<<<< HEAD
 //
 import * as stream from 'stream';
 import * as fs from 'fs';
@@ -54,4 +55,15 @@ export const tuningTrouble = () => {
 	});
 
 	return 0
+=======
+
+const testData = [
+  'mjqjpqmgbljsphdztnvjfqwrcgsml',
+]
+
+export const tuningTrouble = () => {
+  const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
+  console.log(testData)
+  return 0
+>>>>>>> 1ea1d7f (day 6 initial commit)
 }
