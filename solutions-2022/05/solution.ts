@@ -1,11 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { readFileSync } from 'fs'
 >>>>>>> 7f5443e (day 5 initial)
+=======
+import { readFileSync } from 'fs'
+>>>>>>> f08969e (day 5 stuff)
 
 // https://adventofcode.com/2022/day/5
 // https://adventofcode.com/2022/day/5/input
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 import * as stream from 'stream';
 import * as fs from 'fs';
@@ -14,6 +19,8 @@ import * as readline from 'readline';
 
 =======
 >>>>>>> 7f5443e (day 5 initial)
+=======
+>>>>>>> f08969e (day 5 stuff)
 const testData = [
   '    [D]    ',
   '[N] [C]    ',
@@ -26,6 +33,7 @@ const testData = [
   'move 1 from 1 to 2',
 ]
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
 
@@ -90,9 +98,14 @@ const testData = [
 		return 0
 	}
 =======
+=======
+>>>>>>> f08969e (day 5 stuff)
 export const supplyStacks = () => {
   const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
   console.log(testData)
   return 0
 }
+<<<<<<< HEAD
 >>>>>>> 7f5443e (day 5 initial)
+=======
+>>>>>>> f08969e (day 5 stuff)
