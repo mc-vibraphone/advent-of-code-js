@@ -3,6 +3,7 @@
 // https://adventofcode.com/2022/day/3/input
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import * as stream from 'stream';
 <<<<<<< HEAD
 import * as fs from 'fs';
@@ -43,28 +44,36 @@ export const badgeLocators = () => {
 =======
 =======
 //import * as stream from 'stream';
+=======
+import * as stream from 'stream';
+>>>>>>> 2ee40dd (2 star answer - need to get a better handle on how types are propagated through the JS runtime.)
 import * as fs from 'fs';
 import * as readline from 'readline';
 >>>>>>> 2c5108a (Worked through part one after misinterpreting the reqs.)
 
-const testData = [
-  'vJrwpWtwJgWrhcsFMMfFFhFp',
-  'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
-  'PmmdzqPrVvPwwTWBwg',
-  'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
-  'ttgJtRGJQctTZtZT',
-  'CrZsJsPPZsGzwwsLwLmpwMDw',
+const testData:string[] = [
+	'vJrwpWtwJgWrhcsFMMfFFhFp',
+	'jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL',
+	'PmmdzqPrVvPwwTWBwg',
+	'wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn',
+	'ttgJtRGJQctTZtZT',
+	'CrZsJsPPZsGzwwsLwLmpwMDw',
 ]
 
-export const rucksackReorganization = () => {
+export const badgeLocators = () => {
 
-	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
+//	const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
 
 	const rl = readline.createInterface(fs.createReadStream(`${__dirname}/data.txt`));
 
-	let all_dupes = [];
+	let all_badges = [];
+
+	let group_ctr = 0;
+
+	let sets = [];
 
 	rl.on('line', (line:string) => {
+<<<<<<< HEAD
 		let halfway = Math.trunc(line.length / 2);
 
 		if((halfway * 2) != line.length) {
@@ -78,11 +87,19 @@ export const rucksackReorganization = () => {
 
 		let intersection = [...set_0].filter( item => set_1.has(item));
 		if(intersection.length != 1)
+=======
+		console.log(line);
+		if(sets.length < 3)
+>>>>>>> 2ee40dd (2 star answer - need to get a better handle on how types are propagated through the JS runtime.)
 		{
-			console.error(`bad intersection in ${line}`);
-			return false;
+			sets.push(new Set([...line]));
 		}
-		intersection.forEach((item) => all_dupes.push(item));
+		if(sets.length >= 3) {
+			sets.forEach(set => { console.log(`set :: ${[...set]}`); });
+			all_badges.push([...(sets[0])].filter(item => sets[1].has(item)).filter(item => sets[2].has(item)));
+			group_ctr = 0;
+			sets = [];
+		}
 
 	});
 
@@ -96,6 +113,7 @@ export const rucksackReorganization = () => {
 	// and 'A' into 27 through 'Z' into 52.
 	// Jerks. :P
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	const convert_char_value = (char:string) => (char.toString()[0] > 'Z')
 		? char.toString().charCodeAt(0) - 96
@@ -119,14 +137,26 @@ export const rucksackReorganization = () => {
 	const convert_char_value = (char:string) => (char[0] > 'Z')
 		? (char.charCodeAt(0) - 96)
 		: (char.charCodeAt(0) - 38);
+=======
+	const convert_char_value = (char:string) => (char.toString()[0] > 'Z')
+		? char.toString().charCodeAt(0) - 96
+		: char.toString().charCodeAt(0) - 38;
+>>>>>>> 2ee40dd (2 star answer - need to get a better handle on how types are propagated through the JS runtime.)
 
 	rl.on('close', () => {
+
 		console.log(`EOF`);
-		let priorities_sum = [...all_dupes].reduce(
+		console.log(`Badge list is ${all_badges}`);
+
+		let this_sum = all_badges.reduce(
 			(total:number, item:string) => total + convert_char_value(item), 0);
 
+<<<<<<< HEAD
 		console.log(`Summed priorities is ${priorities_sum}`);
 >>>>>>> 2c5108a (Worked through part one after misinterpreting the reqs.)
+=======
+		console.log(`Summed priorities is ${this_sum}`);
+>>>>>>> 2ee40dd (2 star answer - need to get a better handle on how types are propagated through the JS runtime.)
 	});
 
 	rl.on('error', (error:Error) => {
