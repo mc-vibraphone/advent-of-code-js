@@ -1,11 +1,17 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3caa82f (sta one solution)
 import * as stream from 'stream';
 import * as fs from 'fs';
 import * as readline from 'readline';
 
+<<<<<<< HEAD
 =======
 import { readFileSync } from 'fs'
 >>>>>>> af0dd4b (day 4 start)
+=======
+>>>>>>> 3caa82f (sta one solution)
 
 // https://adventofcode.com/2022/day/4
 // https://adventofcode.com/2022/day/4/input
@@ -21,6 +27,9 @@ const testData = [
 
 export const campCleanup = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3caa82f (sta one solution)
 
 	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
 
@@ -31,10 +40,17 @@ export const campCleanup = () => {
 		let areas:string [] = pair.split(',');
 		let area_0:number[] = Array.from(areas[0].split('-')).map(item => parseInt(item));
 		let area_1:number[] = Array.from(areas[1].split('-')).map(item => parseInt(item));
+<<<<<<< HEAD
 		if((area_0[0] <= area_1[0]) && (area_0[1] >= area_1[0])) {
 			return true;
 		}
 		if(area_1[0] <= area_0[0] && area_1[1] >= area_0[0]) {
+=======
+		if((area_0[0] <= area_1[0]) && (area_0[1] >= area_1[1])) {
+			return true;
+		}
+		if(area_1[0] <= area_0[0] && area_1[1] >= area_0[1]) {
+>>>>>>> 3caa82f (sta one solution)
 			return true;
 		}
 		return false;
@@ -59,9 +75,12 @@ export const campCleanup = () => {
 	});
 
 	return 0
+<<<<<<< HEAD
 =======
   const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
   console.log(testData)
   return 0
 >>>>>>> af0dd4b (day 4 start)
+=======
+>>>>>>> 3caa82f (sta one solution)
 }
