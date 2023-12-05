@@ -41,6 +41,7 @@ export const campCleanup = () => {
 		let area_0:number[] = Array.from(areas[0].split('-')).map(item => parseInt(item));
 		let area_1:number[] = Array.from(areas[1].split('-')).map(item => parseInt(item));
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if((area_0[0] <= area_1[0]) && (area_0[1] >= area_1[0])) {
 			return true;
 		}
@@ -51,6 +52,12 @@ export const campCleanup = () => {
 		}
 		if(area_1[0] <= area_0[0] && area_1[1] >= area_0[1]) {
 >>>>>>> 3caa82f (sta one solution)
+=======
+		if((area_0[0] <= area_1[0]) && (area_0[1] >= area_1[0])) {
+			return true;
+		}
+		if(area_1[0] <= area_0[0] && area_1[1] >= area_0[0]) {
+>>>>>>> e2c3c01 (day 4 two star changes)
 			return true;
 		}
 		return false;
