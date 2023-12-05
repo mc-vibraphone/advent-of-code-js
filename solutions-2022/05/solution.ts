@@ -57,6 +57,7 @@ const testData = [
 		let done_reading = false;
 
 		rl.on('line', (line: string) => {
+<<<<<<< HEAD
 			if(!line) {
 				return;
 			}
@@ -132,21 +133,22 @@ export const supplyStacks = () => {
 
 		rl.on('line', (line: string) => {
 			console.log(line);
+=======
+>>>>>>> 1db3390 (2 star complete)
 			if(!line) {
 				return;
 			}
 			if(line.includes('move')) {
-				console.log(`this here is a move thing ${line}`);
 				let _instructions = line.split(' ');
 				let _count = parseInt(_instructions[1]);
 				let _from = parseInt(_instructions[3]) - 1;
 				let _to = parseInt(_instructions[5]) - 1;
-				console.log(` moving ${_count} from ${_from} to ${_to}`);
-				for(let i = 0; i < _count; i++)
-				{
-					stacks[_to].unshift(stacks[_from].shift());
-				}
-				stacks.forEach((stack, idx) => { console.log(`${idx} :: ${stack}`);});
+
+				let _to_move = stacks[_from].splice(0, _count);
+
+				stacks[_to] = _to_move.concat(stacks[_to]);
+
+//				stacks.forEach((stack, idx) => { console.log(`${idx}:: length ::${stack.length} :: ` + `${stack}`.padStart(20, '_'));});
 			}
 			else if(!line.includes('1') && !done_reading) {
 				lines.push(line);
@@ -167,7 +169,7 @@ export const supplyStacks = () => {
 						}
 					});
 				});
-				stacks.forEach((stack, idx) => { console.log(`${idx} :: ${stack}`);});
+				stacks.forEach((stack, idx) => { console.log(`${idx}:: length ::${stack.length} :: ` + `${stack}`.padStart(20, '_'));});
 			}
 
 		});
