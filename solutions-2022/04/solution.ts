@@ -1,7 +1,11 @@
+<<<<<<< HEAD
 import * as stream from 'stream';
 import * as fs from 'fs';
 import * as readline from 'readline';
 
+=======
+import { readFileSync } from 'fs'
+>>>>>>> af0dd4b (day 4 start)
 
 // https://adventofcode.com/2022/day/4
 // https://adventofcode.com/2022/day/4/input
@@ -16,6 +20,7 @@ const testData = [
 ]
 
 export const campCleanup = () => {
+<<<<<<< HEAD
 
 	//const rl = readline.createInterface(stream.Readable.from(testData.join(('\n'))));
 
@@ -54,4 +59,9 @@ export const campCleanup = () => {
 	});
 
 	return 0
+=======
+  const data = readFileSync(`${__dirname}/data.txt`, 'utf8').split('\n')
+  console.log(testData)
+  return 0
+>>>>>>> af0dd4b (day 4 start)
 }
